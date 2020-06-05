@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    use Favorable;
+
     protected $guarded = [];
 
     public function post() {
@@ -15,4 +17,5 @@ class Comment extends Model
     public function user() {
         return $this->belongsTo(User::class);
     }
+
 }

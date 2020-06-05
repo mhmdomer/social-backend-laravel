@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    use Favorable;
+
     protected $guarded = [];
 
     public function comments() {

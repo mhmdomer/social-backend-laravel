@@ -29,6 +29,7 @@ class ProfilesController extends Controller
 
     public function update(Request $request)
     {
+        // $user = User::find(1);
         $user = auth()->user();
         $request->validate([
             'name' => ['required', 'string', 'regex:/^[A-Za-z][A-Za-z0-9]{4,31}$/', 'max:20', 'min:5', 'alpha_num', 'unique:users,name,' . $user->id],

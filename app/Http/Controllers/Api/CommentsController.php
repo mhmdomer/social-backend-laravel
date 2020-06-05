@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Comment;
 use App\Http\Controllers\Controller;
+use App\Notifications\CommentedOnYourPost;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -36,6 +37,7 @@ class CommentsController extends Controller
             'post_id' => $post->id,
             'body' => $request->body,
         ]);
+        $post->user->notify(new CommentedOnYourPost($post, auth()->user()));
         return response(['data' => $comment, 'message' => 'success'], 200);
     }
 
