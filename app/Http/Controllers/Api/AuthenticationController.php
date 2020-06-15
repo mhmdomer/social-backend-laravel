@@ -41,4 +41,9 @@ class AuthenticationController extends Controller
         return response(['user' => auth()->user(), 'access_token' => $accessToken]);
     }
 
+    public function user(User $user)
+    {
+        return response(['data' => $user, 'message' => 'success'], 200);
+    }
+
 }

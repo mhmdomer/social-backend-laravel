@@ -61,8 +61,7 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
-        $categories = Category::all();
-        return view('posts.edit')->with(['post' => $post, 'categories' => $categories]);
+        return response(['data' => $post, 'message' => 'success'], 200);
     }
 
     /**

@@ -8,6 +8,8 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('/login', 'Api\AuthenticationController@login');
 
     Route::group(['middleware' => ['auth:api']], function () {
+        //get user
+        Route::get('/user/{user}', 'Api\AuthenticationController@user');
         //profile
         Route::get('/profile', 'Api\ProfilesController@show');
         Route::post('/profile', 'Api\ProfilesController@update');
