@@ -12,7 +12,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('/user/{user}', 'Api\AuthenticationController@user');
         //profile
         Route::get('/profile', 'Api\ProfilesController@show');
-        Route::post('/profile', 'Api\ProfilesController@update');
+        Route::post('/profile', 'Api\ProfilesController@update'); // not yet
         //posts
         Route::apiResource('posts', 'Api\PostsController');
         Route::post('/posts/{post}/favorite', 'Api\FavoritesController@storePost');
@@ -24,6 +24,9 @@ Route::group(['prefix' => 'v1'], function () {
         Route::delete('comments/{comment}', 'Api\CommentsController@destroy');
         Route::post('/comments/{comment}/favorite', 'Api\FavoritesController@storeComment');
         Route::post('/comments/{comment}/un_favorite', 'Api\FavoritesController@destroyComment');
+        //notifications
+        Route::get('/notifications', 'Api\NotificationsController@index');
+        Route::post('/notifications/mark_read', 'Api\NotificationsController@markAllAsRead');
         //categories
         Route::get('categories', 'Api\CategoriesController@index');
     });

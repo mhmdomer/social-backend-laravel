@@ -19,8 +19,10 @@ trait Favorable
     public function favorite()
     {
         if (!$this->isFavorited()) {
-            return $this->favorites()->create(['user_id' => auth()->id()]);
+            $this->favorites()->create(['user_id' => auth()->id()]);
+            return true;
         }
+        return false;
     }
 
     public function unFavorite()

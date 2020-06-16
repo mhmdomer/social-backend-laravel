@@ -19,8 +19,8 @@ class FavoritesController extends Controller
      */
     public function storePost(Post $post)
     {
-        $post->favorite();
-        $post->user->notify(new YourPostWasFavorited($post, auth()->user()));
+        $favorited = $post->favorite();
+        if($favorited) $post->user->notify(new YourPostWasFavorited($post, auth()->user()));
         return response(['message' => 'success']);
     }
 
@@ -33,8 +33,8 @@ class FavoritesController extends Controller
      */
     public function storeComment(Comment $comment)
     {
-        $comment->favorite();
-        $comment->user->notify(new YourCommentWasFavorited($comment, auth()->user()));
+        $favorited = $comment->favorite();
+        if($favorited) $comment->user->notify(new YourCommentWasFavorited($comment, auth()->user()));
         return response(['message' => 'success']);
     }
 

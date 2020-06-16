@@ -46,7 +46,7 @@ class PostsController extends Controller
             $post->image = $imageUrl;
             $post->public_id = $public_id;
         }
-        $post->user_id = 1;
+        $post->user_id = auth()->id();
         $post->category_id = $request->category;
         $post->body = $request->body;
         $post->save();
