@@ -9,6 +9,7 @@ class Comment extends Model
     use Favorable;
 
     protected $guarded = [];
+    protected $appends = ['favoriteCount', 'isFavorited'];
 
     public function post() {
         return $this->belongsTo(Post::class);

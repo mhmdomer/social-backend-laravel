@@ -37,7 +37,7 @@ class YourPostWasFavorited extends Notification
     public function toDatabase()
     {
         return [
-            'user' => $this->user->name,
+            'user' => $this->user->only(['id', 'name', 'image']),
             'post' => $this->post->only(['id', 'body']),
         ];
     }
@@ -49,9 +49,6 @@ class YourPostWasFavorited extends Notification
      */
     public function toArray($notifiable)
     {
-        return [
-            'user' => $this->user->name,
-            'post' => $this->post->only(['id', 'body']),
-        ];
+        return $this->toDatabase();
     }
 }

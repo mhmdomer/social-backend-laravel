@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
-use Dotenv\Exception\ValidationException;
 use Illuminate\Http\Request;
 use \Cloudder;
 
@@ -18,7 +16,14 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(10);
+        $posts = Post::with([
+            'user' => function($query) {
+                $query->select('id', 'name', 'image');
+            },
+            'category' => function($query) {
+                $query->select('id', 'name');
+            }
+        ])->paginate(10);
         return response(['date' => $posts, 'message' => 'success'], 200);
     }
 
@@ -59,8 +64,16 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($id)
     {
+        $post = Post::with([
+            'user' => function($query) {
+                $query->select('id', 'name', 'image');
+            },
+            'category' => function($query) {
+                $query->select('id', 'name');
+            }
+        ])->find($id);
         return response(['data' => $post, 'message' => 'success'], 200);
     }
 

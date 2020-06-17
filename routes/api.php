@@ -12,7 +12,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('/user/{user}', 'Api\AuthenticationController@user');
         //profile
         Route::get('/profile', 'Api\ProfilesController@show');
-        Route::post('/profile', 'Api\ProfilesController@update'); // not yet
+        Route::post('/profile', 'Api\ProfilesController@update');
         //posts
         Route::apiResource('posts', 'Api\PostsController');
         Route::post('/posts/{post}/favorite', 'Api\FavoritesController@storePost');

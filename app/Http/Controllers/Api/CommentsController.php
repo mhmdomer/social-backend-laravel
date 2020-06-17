@@ -17,7 +17,11 @@ class CommentsController extends Controller
      */
     public function index(Post $post)
     {
-        $comments = $post->comments()->paginate(10);
+        $comments = $post->comments()->with([
+            'user' => function($query) {
+                $query->select('id', 'name', 'image');
+            },
+        ])->paginate(10);
         return response(['data' => $comments, 'message' => 'success'], 200);
     }
 

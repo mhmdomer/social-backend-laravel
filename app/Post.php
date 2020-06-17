@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use Favorable;
+    protected $appends = ['favoriteCount', 'isFavorited'];
 
     protected $guarded = [];
 
@@ -18,4 +19,7 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
 }

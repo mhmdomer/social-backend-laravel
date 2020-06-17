@@ -37,7 +37,7 @@ class YourCommentWasFavorited extends Notification
     public function toDatabase()
     {
         return [
-            'user' => $this->user->name,
+            'user' => $this->user->only(['id', 'name', 'image']),
             'comment' => $this->comment->only(['post_id', 'id', 'body']),
         ];
     }
@@ -49,9 +49,6 @@ class YourCommentWasFavorited extends Notification
      */
     public function toArray($notifiable)
     {
-        return [
-            'user' => $this->user->name,
-            'comment' => $this->comment->only(['post_id', 'id', 'body']),
-        ];
+        return $this->toDatabase();
     }
 }
