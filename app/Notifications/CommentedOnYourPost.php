@@ -36,6 +36,7 @@ class CommentedOnYourPost extends Notification
     public function toDatabase()
     {
         return [
+                'type' => 'commented_on_your_post',
                 'user' => $this->user->only(['id', 'name', 'image']),
                 'post' => $this->post->only(['id', 'body']),
             ];

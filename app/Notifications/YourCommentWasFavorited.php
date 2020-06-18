@@ -37,6 +37,7 @@ class YourCommentWasFavorited extends Notification
     public function toDatabase()
     {
         return [
+            'type' => 'favorited_your_comment',
             'user' => $this->user->only(['id', 'name', 'image']),
             'comment' => $this->comment->only(['post_id', 'id', 'body']),
         ];

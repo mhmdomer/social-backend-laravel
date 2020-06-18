@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 class NotificationsController extends Controller {
 
     public function index() {
-        $notifications = auth()->user()->notifications()->paginate(10);
+        $notifications = auth()->user()->notifications()->paginate(20);
         return response(['data' => $notifications, 'message' => 'success'], 200);
     }
 
