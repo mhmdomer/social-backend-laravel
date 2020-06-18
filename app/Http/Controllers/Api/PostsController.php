@@ -24,7 +24,7 @@ class PostsController extends Controller
                 $query->select('id', 'name');
             }
         ])->paginate(10);
-        return response(['date' => $posts, 'message' => 'success'], 200);
+        return response(['data' => $posts, 'message' => 'success'], 200);
     }
 
     /**
