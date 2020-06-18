@@ -39,7 +39,7 @@ class YourCommentWasFavorited extends Notification
         return [
             'type' => 'favorited_your_comment',
             'user' => $this->user->only(['id', 'name', 'image']),
-            'comment' => $this->comment->only(['post_id', 'id', 'body']),
+            'post' => $this->comment->post->only(['id']),
         ];
     }
     /**
