@@ -38,16 +38,60 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function posts() {
-        return $this->hasMany(Post::class);
+    protected $appends = ['followerCount', 'followingCount', 'followingMe', 'followed'];
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'user_id', 'id');
     }
 
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
 
-    public function favorites() {
-        return $this->morphMany();
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'following_id', 'follower_id');
     }
 
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'following_id');
+    }
+
+    public function follow(User $user)
+    {
+        if ($this->followers->contains($user->id)) {
+            return false;
+        }
+        $this->followers()->attach($user->id);
+        return true;
+    }
+
+    public function unFollow(User $user)
+    {
+        $this->followers()->detach($user->id);
+        return false;
+    }
+
+    public function getFollowerCountAttribute()
+    {
+        return $this->followers()->count();
+    }
+
+    public function getFollowingCountAttribute()
+    {
+        return $this->following()->count();
+    }
+
+    public function getFollowingMeAttribute()
+    {
+        return $this->followers->contains(auth()->id());
+    }
+
+    public function getFollowedAttribute()
+    {
+        return $this->following->contains(auth()->id());
+    }
 }

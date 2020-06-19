@@ -43,6 +43,17 @@ class AuthenticationController extends Controller
 
     public function user(User $user)
     {
+        $user = $user->only([
+            'id',
+            'name',
+            'email',
+            'image',
+            'followerCount',
+            'followingCount',
+            'followingMe',
+            'followed',
+            'created_at',
+        ]);
         return response(['data' => $user, 'message' => 'success'], 200);
     }
 
