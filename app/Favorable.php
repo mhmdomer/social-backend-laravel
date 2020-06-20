@@ -34,16 +34,16 @@ trait Favorable
 
     public function isFavorited()
     {
-        return $this->favorites->where('user_id', auth()->id())->count();
+        return $this->favorites()->where('user_id', auth()->id())->count();
     }
 
     public function getFavoriteCountAttribute()
     {
-        return $this->favorites->count();
+        return $this->favorites()->count();
     }
 
     public function getIsFavoritedAttribute()
     {
-        return $this->favorites->where('user_id', auth()->id())->count();
+        return $this->favorites()->where('user_id', auth()->id())->count();
     }
 }

@@ -42,7 +42,7 @@ class User extends Authenticatable
 
     public function posts()
     {
-        return $this->hasMany(Post::class, 'user_id', 'id');
+        return $this->hasMany(Post::class);
     }
 
     public function comments()
@@ -87,11 +87,11 @@ class User extends Authenticatable
 
     public function getFollowingMeAttribute()
     {
-        return $this->followers->contains(auth()->id());
+        return $this->followers()->where('follower_id', auth()->id())->count() > 0;
     }
 
     public function getFollowedAttribute()
     {
-        return $this->following->contains(auth()->id());
+        return $this->following()->where('following_id', auth()->id())->count() > 0;
     }
 }

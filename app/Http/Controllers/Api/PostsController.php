@@ -28,6 +28,15 @@ class PostsController extends Controller
         return response(['data' => $posts, 'message' => 'success'], 200);
     }
 
+    public function userPosts(User $user) {
+        $posts = Post::where('user_id', $user->id)->with([
+            'user' => function ($query) {
+                $query->select('id', 'name', 'image');
+            },
+        ])->paginate(10);
+        return response(['data' => $posts, 'message' => 'success'], 200);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

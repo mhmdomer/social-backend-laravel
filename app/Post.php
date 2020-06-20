@@ -9,7 +9,6 @@ class Post extends Model
     use Favorable;
     protected $appends = ['favoriteCount', 'isFavorited'];
     protected $casts = ['isFavorited' => 'boolean'];
-    protected $with = ['user'];
 
     protected $guarded = [];
 
