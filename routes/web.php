@@ -4,6 +4,9 @@ use App\Category;
 use App\Post;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/login', function() {
+    return 'test';
+})->name('login');
 Route::post('/posts', 'Api\PostsController@store')->name('store');
 Route::delete('/posts/{post}', 'Api\PostsController@destroy')->name('destroy');
 Route::get('/posts/{post}', 'Api\PostsController@show')->name('posts.show');

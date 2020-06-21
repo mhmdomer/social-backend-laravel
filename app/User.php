@@ -62,7 +62,7 @@ class User extends Authenticatable
 
     public function follow(User $user)
     {
-        if ($this->followers->contains($user->id)) {
+        if ($this->followers()->where('follower_id', $user->id)->count() > 0) {
             return false;
         }
         $this->followers()->attach($user->id);

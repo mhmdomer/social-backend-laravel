@@ -46,7 +46,7 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category' => 'integer|required|exists:categories,id',
+            'category_id' => 'integer|required|exists:categories,id',
             'body' => 'required_without:image',
             'image' => 'required_without:body',
         ]);
@@ -62,7 +62,7 @@ class PostsController extends Controller
             $post->public_id = $public_id;
         }
         $post->user_id = auth()->id();
-        $post->category_id = $request->category;
+        $post->category_id = $request->category_id;
         $post->body = $request->body;
         $post->save();
         return response(['data' => $post, 'message' => 'success'], 200);
@@ -98,7 +98,7 @@ class PostsController extends Controller
     {
         $this->authorize('update', $post);
         $request->validate([
-            'category' => 'integer|required|exists:categories,id',
+            'category_id' => 'integer|required|exists:categories,id',
             'body' => 'required_without:image',
             'image' => 'required_without:body',
         ]);
@@ -116,7 +116,7 @@ class PostsController extends Controller
                 Cloudder::destroyImage($oldImage);
             }
         }
-        $post->category_id = $request->category;
+        $post->category_id = $request->category_id;
         $post->body = $request->body;
         $post->save();
         return response(['date' => $post, 'message' => 'success'], 200);
