@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use Favorable;
-    protected $appends = ['favoriteCount', 'isFavorited'];
+    protected $appends = ['favoriteCount', 'isFavorited', 'commentCount'];
     protected $casts = ['isFavorited' => 'boolean'];
 
     protected $guarded = [];
@@ -22,5 +22,9 @@ class Post extends Model
 
     public function category() {
         return $this->belongsTo(Category::class);
+    }
+
+    public function getCommentCountAttribute() {
+        return $this->comments()->count();
     }
 }
