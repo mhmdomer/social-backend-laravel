@@ -57,7 +57,7 @@ class PostsController extends Controller
             $public_id = 'posts/' . $image->getBasename() . time();
             Cloudder::upload($realPath, 'posts/' . $image->getBasename() . time());
             list($width, $height) = getimagesize($realPath);
-            $imageUrl = Cloudder::show(Cloudder::getPublicId(), ['width' => $width / 2, 'height' => $height / 2]);
+            $imageUrl = Cloudder::show(Cloudder::getPublicId(), ['width' => (int) ($width / 2), 'height' => (int)($height / 2)]);
             $post->image = $imageUrl;
             $post->public_id = $public_id;
         }
