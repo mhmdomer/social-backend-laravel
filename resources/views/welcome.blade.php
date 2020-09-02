@@ -109,7 +109,7 @@
             <div>
                 <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <select name="category">
+                    <select name="category_id">
                         @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{$category->name}}</option>
                         @endforeach
