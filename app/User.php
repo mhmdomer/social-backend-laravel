@@ -87,11 +87,11 @@ class User extends Authenticatable
 
     public function getFollowingMeAttribute()
     {
-        return $this->followers()->where('follower_id', auth()->id())->count() > 0;
+        return $this->following()->where('following_id', auth()->id())->count() > 0;
     }
 
     public function getFollowedAttribute()
     {
-        return $this->following()->where('following_id', auth()->id())->count() > 0;
+        return $this->followers()->where('follower_id', auth()->id())->count() > 0;
     }
 }
