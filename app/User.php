@@ -52,26 +52,26 @@ class User extends Authenticatable
 
     public function followers()
     {
-        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'following_id');
+        return $this->belongsToMany(User::class, 'followers', 'following_id', 'follower_id');
     }
 
     public function following()
     {
-        return $this->belongsToMany(User::class, 'followers', 'following_id', 'follower_id');
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'following_id');
     }
 
     public function follow(User $user)
     {
-        if ($this->followers()->where('follower_id', $user->id)->count() > 0) {
+        if ($this->following()->where('following_id', $user->id)->count() > 0) {
             return false;
         }
-        $this->followers()->attach($user->id);
+        $this->following()->attach($user->id);
         return true;
     }
 
     public function unFollow(User $user)
     {
-        $this->followers()->detach($user->id);
+        $this->following()->detach($user->id);
         return false;
     }
 

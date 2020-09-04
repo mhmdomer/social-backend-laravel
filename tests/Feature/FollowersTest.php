@@ -29,6 +29,7 @@ class FollowersTest extends TestCase
         $this->signIn();
         $this->postJson($this->baseUrl . 'follow/' . $this->user->id)
             ->assertStatus(200);
+        $this->assertEquals($this->user->followers()->count(), 1);
         $this->assertDatabaseCount('followers', 1);
     }
 
@@ -39,8 +40,10 @@ class FollowersTest extends TestCase
         $this->postJson($this->baseUrl . 'follow/' . $this->user->id)
             ->assertStatus(200);
         $this->assertDatabaseCount('followers', 1);
+        $this->assertEquals($this->user->followers()->count(), 1);
         $this->postJson($this->baseUrl . 'un_follow/' . $this->user->id)
             ->assertStatus(200);
+        $this->assertEquals($this->user->followers()->count(), 0);
         $this->assertDatabaseCount('followers', 0);
     }
 
