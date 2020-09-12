@@ -56,7 +56,7 @@ class FavoritesTest extends TestCase
     }
 
     /** @test */
-    public function authenticated_user_can_un_favorite_a_favorited_post()
+    public function authenticated_user_can_unfavorite_a_favorited_post()
     {
         $post = create('App\Post');
         $this->signIn();
@@ -69,7 +69,7 @@ class FavoritesTest extends TestCase
     }
 
     /** @test */
-    public function authenticated_user_can_un_favorite_a_favorited_comment()
+    public function authenticated_user_can_unfavorite_a_favorited_comment()
     {
         $comment = create('App\Comment');
         $this->signIn();

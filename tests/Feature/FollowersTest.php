@@ -34,7 +34,7 @@ class FollowersTest extends TestCase
     }
 
     /** @test */
-    public function authenticated_users_can_un_follow_others()
+    public function authenticated_users_can_unfollow_others()
     {
         $this->signIn();
         $this->postJson($this->baseUrl . 'follow/' . $this->user->id)

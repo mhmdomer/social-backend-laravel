@@ -41,6 +41,11 @@ class CommentsController extends Controller
             'post_id' => $post->id,
             'body' => $request->body,
         ]);
+        $comment = Comment::with([
+            'user' => function($query) {
+                $query->select('id', 'name', 'image');
+            },
+        ])->findOrFail($comment->id);
         $post->user->notify(new CommentedOnYourPost($post, auth()->user()));
         return response(['data' => $comment, 'message' => 'success'], 200);
     }

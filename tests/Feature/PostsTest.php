@@ -15,7 +15,7 @@ class PostsTest extends TestCase
     }
 
     /** @test */
-    public function unauthorized_users_cannot_view_posts() {
+    public function unauthorized_users_cannot_view_posts_list() {
         $this->get('/api/v1/posts')->assertRedirect('/login');
     }
 
@@ -27,26 +27,26 @@ class PostsTest extends TestCase
     }
 
     /** @test */
-    public function unauthorized_users_cannot_create_a_specific_post() {
+    public function unauthorized_users_cannot_create_a_post() {
         $post = make('App\Post');
         $this->postJson('/api/v1/posts', $post->toArray())->assertStatus(401);
     }
 
     /** @test */
-    public function authorized_users_can_create_a_specific_post() {
+    public function authorized_users_can_create_a_post() {
         $this->signIn();
         $post = make('App\Post');
         $this->postJson('/api/v1/posts', $post->toArray())->assertStatus(200);
     }
 
     /** @test */
-    public function unauthorized_users_cannot_view_a_specific_post() {
+    public function unauthorized_users_cannot_view_a_post() {
         $post = create('App\Post');
         $this->getJson('/api/v1/posts/' . $post->id)->assertStatus(401);
     }
 
     /** @test */
-    public function authorized_users_can_view_a_specific_post() {
+    public function authorized_users_can_view_a_post() {
         $this->signIn();
         $post = create('App\Post');
         $this->getJson('/api/v1/posts/' . $post->id)->assertStatus(200);

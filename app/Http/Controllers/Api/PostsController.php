@@ -17,7 +17,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::with([
+        $posts = Post::latest()->with([
             'user' => function($query) {
                 $query->select('id', 'name', 'image');
             },
