@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -93,5 +94,9 @@ class User extends Authenticatable
     public function getFollowedAttribute()
     {
         return $this->followers()->where('follower_id', auth()->id())->count() > 0;
+    }
+
+    public function getCreatedAtAttribute($value) {
+        return (new Carbon($value))->diffForHumans();
     }
 }

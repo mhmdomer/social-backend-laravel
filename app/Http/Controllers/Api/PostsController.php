@@ -83,7 +83,7 @@ class PostsController extends Controller
             'category' => function($query) {
                 $query->select('id', 'name');
             }
-        ])->find($id);
+        ])->findOrFail($id);
         return response(['data' => $post, 'message' => 'success'], 200);
     }
 

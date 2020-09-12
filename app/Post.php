@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
@@ -26,5 +27,9 @@ class Post extends Model
 
     public function getCommentCountAttribute() {
         return $this->comments()->count();
+    }
+
+    public function getCreatedAtAttribute($value) {
+        return (new Carbon($value))->diffForHumans();
     }
 }
