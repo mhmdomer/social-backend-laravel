@@ -32,7 +32,8 @@ class FollowedYou extends Notification
 
     public function toDatabase() {
         return [
-            'user' => $this->user->only(['id', 'name', 'image']),
+            'type' => 'followed_you',
+            'user' => $this->user,
         ];
     }
 

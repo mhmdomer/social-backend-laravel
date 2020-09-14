@@ -10,7 +10,7 @@ class Post extends Model
     use Favorable;
     protected $appends = ['favoriteCount', 'isFavorited', 'commentCount'];
     protected $casts = ['isFavorited' => 'boolean'];
-
+    protected $with = ['user:id,name,image', 'category:id,name'];
     protected $guarded = [];
 
     public function comments() {

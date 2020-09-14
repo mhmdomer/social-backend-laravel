@@ -35,7 +35,8 @@ class FavoritesController extends Controller
     public function storeComment(Comment $comment)
     {
         $favorited = $comment->favorite();
-        if ($favorited) $comment->user->notify(new YourCommentWasFavorited($comment, auth()->user()));
+        if ($favorited && auth()->id() != $comment->post->user->id)
+            $comment->user->notify(new YourCommentWasFavorited($comment, auth()->user()));
         return response(['message' => 'success']);
     }
 
