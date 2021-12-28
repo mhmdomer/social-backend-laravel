@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Comment;
 use App\Post;
 use App\User;
